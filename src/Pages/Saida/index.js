@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import Firebase from '../../Database/Connection';
+import {Link} from 'react-router-dom';
 import {Container, Grid, TextField} from '@material-ui/core';
 import moment from 'moment';
 
@@ -113,8 +114,9 @@ export default function Saida(){
     <main id="entradadeestoque">
       <Header/>
       <Container>
-        <Grid>
-          <h1>Entregar EPI</h1>
+        <Grid container direction="row" alignItems="center">
+          <Grid sm={2}><Link to="/">Ir para tela inicial</Link></Grid>
+          <Grid sm={10}><h1>Entregar EPI</h1></Grid>
         </Grid>
 
         <Grid
