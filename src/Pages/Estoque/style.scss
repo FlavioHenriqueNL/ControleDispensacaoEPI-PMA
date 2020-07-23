@@ -1,0 +1,25 @@
+#estoqueatual{
+  .tableEstoque{
+    margin-bottom: 50px;
+    thead{
+      tr{
+        td{
+          text-align: center;
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          &:first-child{
+            text-align: left;
+
+          }
+          padding: 5px;
+          text-align: center;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.tableEstoque{
+  margin-bottom: 25px;
+  .qtdAdicionar{
+    width: 99%;
+  }
+}
+.btn-adicionar{
+  width: 150px;
+  height: 50px;
+  border: none;
+  background:#2b2e83;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.telainicial{
+  border: none;
+  background: none;
+  color: #2b2e83;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}

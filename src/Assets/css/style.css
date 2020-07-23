@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap");
+html, body, #root {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+#login .Container {
+  padding: 40px;
+  border: 1px solid #000;
+}
+
+.head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.tableEstoque {
+  width: 100%;
+}
+
+.tableEstoque thead {
+  height: 50px;
+  background: #2b2e83;
+  color: #fff;
+}
+
+.tableEstoque thead td {
+  text-align: center;
+}
+
+.tableEstoque thead #nome {
+  width: 60%;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=style.css.map */
