@@ -10,15 +10,15 @@ import './style.scss';
 
 export default function UltimasSaidas(){
 
-  const [listaEntradas, setListaEntradas] = useState([]);
+  const [listaSaidas, setListaSaidas] = useState([]);
   const history = useHistory();
 
   useEffect(()=>{
-    firebase.db.collection('movimentacoes').where('tipo', "==", "Entrada").get().then(
+    firebase.db.collection('movimentacoes').where('tipo', "==", "Saída").get().then(
       snap => {
-        let handleEntradas = [];
+        let handleSaidas = [];
         snap.forEach(mov => {
-          handleEntradas.push({
+          handleSaidas.push({
             id: mov.id,
             ubs: mov.data().ubs,
             data: mov.data().data,
@@ -26,7 +26,7 @@ export default function UltimasSaidas(){
             entregador: mov.data().nome
           })
         });
-        setListaEntradas(handleEntradas);
+        setListaSaidas(handleSaidas);
       }
     )
   },[])
@@ -38,11 +38,11 @@ export default function UltimasSaidas(){
         <Container>
           <header>
             <button onClick={() => history.push("/")}> Tela inicial</button>
-            <h1>Ultimas Entradas</h1>
+            <h1>Ultimas Saídas</h1>
           </header>
 
-        {listaEntradas.map( entrada => 
-          <AcordeaoIO movimentacao={entrada} />
+        {listaSaidas.map( saida => 
+          <AcordeaoIO movimentacao={saida} />
         )}
 
         </Container>

@@ -10,17 +10,11 @@ export default function Saida(){
   const [ubs, setUbs] = useState("");
   const [usuario, setUsuario] = useState("");
   const [epi, setEpi] = useState([]);
-  const [addEpi, setAddEpi] = useState([]);
+  const [addEpi, setAddEpi] = useState(epi);
   const [newEpi, setNewEpi] = useState([]);
 
   useEffect(()=>{
-    Firebase.auth.onAuthStateChanged(logged => {
-      Firebase.db.collection("usuarios").doc(logged.uid).get().then(
-        doc => {
-          setUsuario(doc.data().nome)
-        }
-      )
-    })
+    setUsuario(localStorage.getItem('nomeUsuario'));
     
     Firebase.db.collection("epi").get().then(
       snap => {
@@ -53,61 +47,50 @@ export default function Saida(){
   const updateFieldChanged = index => e => {    
     let fieldValue = parseInt(e.target.value);
     let fieldIndex = index;
-    let handleAddEpi = addEpi;
 
-    console.log(handleAddEpi);
-
+    let handleAddEpi = [...addEpi];
     handleAddEpi[fieldIndex].quantidade = fieldValue;
     setAddEpi(handleAddEpi); 
-
-    console.log(addEpi);
   }
-
-  const addMovimentacao = () => {
-    Firebase.db.collection("movimentacoes").add({
+  
+  async function addMovimentacao(qtd){
+   await Firebase.db.collection("movimentacoes").add({
       tipo: "Saída",
       ubs: ubs,
       data: moment().format("L"),
-      epis: addEpi,
+      epis: qtd,
       nome: usuario
     }).then(
       alert("Movimentação criada com sucesso.")
     ).catch(err => alert(err));
+    
+    entregarEpi(qtd);
   }
- 
 
-  const entregarEpi = (e) =>{
+  function entregarEpi(qtd){
 
-    e.preventDefault();
-    addMovimentacao();
+    let handleAdd = [...qtd];
+    let handleEpi = [...epi];
 
-    for(let i = 0; i<epi.length; i++){
-      console.log(epi[i].quantidade + "Quantidade de existente");
-      console.log(addEpi[i].quantidade + "Quantidade adicionada");
-      console.log(epi[i].quantidade + addEpi[i].quantidade + " : Quantidade resultante." )
-      
-     newEpi.push({
-        id: epi[i].id,
-        nome: epi[i].nome,
-        quantidade: epi[i].quantidade - addEpi[i].quantidade
-      });
-    }
-    setNewEpi(newEpi);
+    handleEpi.forEach( (handle, index) => {
+      handle.quantidade -= handleAdd[index].quantidade;
+    });
+    setNewEpi(handleEpi);      
 
-    newEpi.map(item => {
-      console.log("ID: "+ item.id);
-      console.log("nome: "+ item.nome);
-      console.log("quantidade: "+ item.quantidade);
+    handleEpi.map(item => {
       Firebase.db.collection("epi").doc(item.id).set({
         nome: item.nome,
         quantidade: item.quantidade
       });
     });
-    setEpi(newEpi);
-    alert("Entrada realizada com sucesso!");
+
+    alert("Entrega realizada com sucesso!");
   }
 
-
+  const registrarSaida = (e) =>{
+    e.preventDefault();
+    addMovimentacao(addEpi);
+  }
 
   return(
     
@@ -133,7 +116,7 @@ export default function Saida(){
           </Grid>
         </Grid>
           
-        <form onSubmit={entregarEpi}>
+        <form onSubmit={registrarSaida}>
           <table class="tableEstoque">
             <thead>
               <tr>

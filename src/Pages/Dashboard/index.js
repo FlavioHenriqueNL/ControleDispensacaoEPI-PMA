@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Firebase from '../../Database/Connection';
 import {Link} from 'react-router-dom';
 import Header from '../../Components/Header/Header';
@@ -9,9 +9,9 @@ import StorageIcon from '@material-ui/icons/Storage';
 import "../../Assets/css/style.css";
 import "./style.css";
 
-const Dashboard = () => (
-  <>
-
+const Dashboard = () => {
+  return(
+    <>
     <Header/>
 
     <main className="dashboard">
@@ -38,8 +38,11 @@ const Dashboard = () => (
         
       </Container>      
     </main>
-
   </>
-)
+  );
+
+}
+  
+
 
 export default Dashboard;

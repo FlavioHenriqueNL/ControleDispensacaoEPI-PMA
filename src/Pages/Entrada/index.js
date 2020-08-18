@@ -1,161 +1,144 @@
-import React, {useEffect, useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Firebase from '../../Database/Connection';
+import {Link} from 'react-router-dom';
+import {Container, Grid, TextField} from '@material-ui/core';
 import moment from 'moment';
-import {useHistory, Link} from 'react-router-dom';
+
 import Header from '../../Components/Header/Header';
-import {Container, Grid} from '@material-ui/core';
 import './style.css';
 
-const HomeButton = () => {
-  let history = useHistory();
+export default function Entrada(){
+  const [ubs, setUbs] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [epi, setEpi] = useState([]);
+  const [addEpi, setAddEpi] = useState(epi);
+  const [newEpi, setNewEpi] = useState([]);
 
-  function handleClick(){
-    history.push("/");
-  }
-  return(
-    <button className="telainicial" type="button" onClick={handleClick}>
-      Ir para tela inicial
-    </button>
-  )
-}
-
-export default class EntradaNew extends React.Component{
-
-  constructor(props){
-    super(props);
-    this.state = {
-      epi: [],
-      addEpi: [],
-      novoEpi: [],
-     
-    }
-    this.updateFieldChanged = this.updateFieldChanged.bind(this);
-    this.adicionarEpi = this.adicionarEpi.bind(this);
-  }
-
-  componentWillMount(){
+  useEffect(()=>{
+    setUsuario(localStorage.getItem('nomeUsuario'));
     Firebase.db.collection("epi").get().then(
       snap => {
-        let s = this.state;
+        let handleEpi = [];
+        let handleAddEpi = [];
         snap.forEach(
           doc => {
-            s.epi.push({
+            handleEpi.push({
               id: doc.id,
               nome: doc.data().nome,
               quantidade: parseInt(doc.data().quantidade),
             }) 
           }
         );
-        this.setState(s);
-        this.setState({addEpi: this.state.epi});
-        console.log("Retorno concluido.");
-        
+        snap.forEach(
+          doc => {
+            handleAddEpi.push({
+              id: doc.id,
+              nome: doc.data().nome,
+              quantidade: 0,
+            }) 
+          }
+        );
+        setEpi(handleEpi);        
+        setAddEpi(handleAddEpi);
       }, err => console.log(err)
-    );  
-  }
-  async componentDidMount(){
-    var s = this.state;
-    Firebase.auth.onAuthStateChanged(logged => {
-      Firebase.db.collection("usuarios").doc(logged.uid).get().then(
-      
-        doc => {
-          s.nome = doc.data().nome;
-          console.log(s.nome);
-          this.setState({nome: s.nome});
-        }
-      )
-    })
-    
-  }
+    );
+  },[]);
 
-  updateFieldChanged = index => e => {    
+  const updateFieldChanged = index => e => {    
     let fieldValue = parseInt(e.target.value);
     let fieldIndex = index;
-    console.log("Field Value:" + fieldValue);
 
-    this.setState(prevState => ({
-      addEpi: prevState.addEpi.map(
-        (el, index) => index === fieldIndex ? { ...el, quantidade: fieldValue }: el
-      )
-    }));
+    let handleAddEpi = [...addEpi];
+    handleAddEpi[fieldIndex].quantidade = fieldValue;
+    setAddEpi(handleAddEpi); 
+  }
+  
+  async function addMovimentacao(qtd){
+   await Firebase.db.collection("movimentacoes").add({
+      tipo: "Entrada",
+      data: moment().format("L"),
+      epis: qtd,
+      nome: usuario
+    }).then(
+      alert("Movimentação criada com sucesso.")
+    ).catch(err => alert(err));
     
+    entregarEpi(qtd);
   }
 
-  adicionarEpi = e => {
-    e.preventDefault();
-    let s = this.state;
+  function entregarEpi(qtd){
 
-    for(let i = 0; i<this.state.epi.length; i++){
-      console.log(s.epi[i].quantidade + "Quantidade de existente");
-      console.log(s.addEpi[i].quantidade + "Quantidade adicionada");
-      console.log(s.epi[i].quantidade + s.addEpi[i].quantidade + " : Quantidade resultante." )
-      
-      s.novoEpi.push({
-        id: s.epi[i].id,
-        nome: s.epi[i].nome,
-        quantidade: s.epi[i].quantidade + s.addEpi[i].quantidade
-      });
-    }
-    this.setState(s);
+    let handleAdd = [...qtd];
+    let handleEpi = [...epi];
 
-    this.state.novoEpi.map(item => {
-      console.log("ID: "+ item.id);
-      console.log("nome: "+ item.nome);
-      console.log("quantidade: "+ item.quantidade);
+    handleEpi.forEach( (handle, index) => {
+      handle.quantidade += handleAdd[index].quantidade;
+    });
+    setNewEpi(handleEpi);      
+
+    handleEpi.map(item => {
       Firebase.db.collection("epi").doc(item.id).set({
         nome: item.nome,
         quantidade: item.quantidade
       });
     });
+
+    alert("Entrada realizada com sucesso!");
+  }
+
+  const registrarSaida = (e) =>{
+    e.preventDefault();
+    addMovimentacao(addEpi);
+  }
+
+  return(
     
-    moment.locale();
-    Firebase.db.collection("movimentacoes").add({
-      tipo: "Entrada",
-      data: moment().format('L'),
-      epis: this.state.addEpi,
-      nome: this.state.nome
-    }).catch( err => alert("Algo de errado não deu certo."));
+    <main id="entradadeestoque">
+      <Header/>
+      <Container>
+        <Grid container direction="row" alignItems="center">
+          <Grid sm={2}><Link to="/">Ir para tela inicial</Link></Grid>
+          <Grid sm={10}><h1>Entrada de Estoque de EPI</h1></Grid>
+        </Grid>
 
-    alert("Adicionado com suceso!");
-    this.setState({epi: this.state.novoEpi});
-  }
-
-  render(){
-    return(
-      <main id="entradadeestoque">
-        <Header/>
-        <Container>
-          <Grid>
-            <HomeButton/>
-            <h1>Adicionar Estoque</h1>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid xs={6}>
+            <h1>Data: {moment().format("L")}</h1>
           </Grid>
-            
-          <form onSubmit={this.adicionarEpi}>
-            <table class="tableEstoque" >
-              <thead>
-                <tr>
-                  <th>Nome do EPI</th>
-                  <th>Estoque atual</th>
-                  <th>Quantidade a adicionar</th>
+          <Grid xs={6}>
+            <TextField fullWidth onChange={(e)=>setUbs(e.target.value)} id="outlined-basic" label="Unidade de Saúde" variant="outlined" />
+          </Grid>
+        </Grid>
+          
+        <form onSubmit={registrarSaida}>
+          <table class="tableEstoque">
+            <thead>
+              <tr>
+                <th>Nome do EPI</th>
+                <th>Estoque atual</th>
+                <th>Quantidade a entregar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                epi.map((epi, index) => 
+                <tr key={epi.id} >
+                  <td>{epi.nome}</td>
+                  <td>{epi.quantidade}</td>
+                  <td><input class="qtdAdicionar" type="number" id={epi.nome} min="0"  onChange={updateFieldChanged(index)} /></td>
                 </tr>
-              </thead>
-              <tbody>
-                {
-                  this.state.epi.map((epi, index) => 
-                  <tr key={epi.id} >
-                    <td>{epi.nome}</td>
-                    <td>{epi.quantidade}</td>
-                    <td><input class="qtdAdicionar" type="number" id={epi.nome} min="0" onChange={this.updateFieldChanged(index)} /></td>
-                  </tr>
-
-                  )
-                }
-              </tbody>
-            </table>
-            <input className="btn-adicionar" type="submit" value="Adicionar"/>
-          </form>
-        </Container>
-      </main>      
-    );
-  }
+                )
+              }
+            </tbody>
+          </table>
+          <input className="btn-adicionar" type="submit" value="Adicionar"/>
+        </form>
+      </Container>
+    </main>
+  )
 }

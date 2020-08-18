@@ -1,0 +1,29 @@
+#ultimasSaidas{
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    button{
+      
+      background: #2b2e83;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 10px;
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      transition: 0.2s all;
+      &:hover{
+        background: lighten(#2b2e83,10%);
+      }
+    }
+    h1{
+      flex: 1;
+      position: relative;
+    }
+    
+  }
+}

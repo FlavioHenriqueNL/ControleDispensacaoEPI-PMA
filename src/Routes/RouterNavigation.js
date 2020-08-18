@@ -9,6 +9,8 @@ import Estoque from '../Pages/Estoque';
 import Entrada from '../Pages/Entrada';
 import UltimasEntradas from '../Pages/UltimasEntradas';
 import Saida from '../Pages/Saida';
+import UltimasSaidas from '../Pages/UltimasSaidas';
+import Comprovante from '../Components/Comprovante';
 
 const RouterNavigation = (props) =>{
 
@@ -20,7 +22,9 @@ const RouterNavigation = (props) =>{
         <ProtectedRoute exact authenticated={props.authenticated} path="/estoque" component={Estoque} />
         <ProtectedRoute exact authenticated={props.authenticated} path="/entrada" component={Entrada} />
         <ProtectedRoute exact authenticated={props.authenticated} path="/entradas" component={UltimasEntradas} />
+        <ProtectedRoute exact authenticated={props.authenticated} path="/saidas" component={UltimasSaidas} />
         <ProtectedRoute exact authenticated={props.authenticated} path="/saida" component={Saida} />
+        <ProtectedRoute exact authenticated={props.authenticated} path="/comprovante/:compID" component={Comprovante} />
       </Switch>
     </Router>
   );

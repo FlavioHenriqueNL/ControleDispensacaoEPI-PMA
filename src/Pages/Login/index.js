@@ -24,7 +24,15 @@ const Login = () => {
     e.preventDefault();
     Firebase.logar(login,senha).then(
       (user) => {
-        history.push('/');
+        Firebase.auth.onAuthStateChanged(logged => {
+          Firebase.db.collection("usuarios").doc(logged.uid).get().then(
+            doc => {
+              localStorage.setItem('nomeUsuario', doc.data().nome)
+            }
+          ).then(
+            history.push('/')
+          )
+        });
       }
     ).catch((error)=>{
       alert(error);
