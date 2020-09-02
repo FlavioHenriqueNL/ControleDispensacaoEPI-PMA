@@ -1,18 +1,42 @@
+#estoqueatual h1 {
+  text-align: center;
+  color: #2b2e83;
+  margin: 35px 0;
+  font-weight: bold;
+}
+
 #estoqueatual .tableEstoque {
   margin-bottom: 50px;
+  border: 2px solid #2b2e83;
 }
 
 #estoqueatual .tableEstoque thead tr td {
+  border: 2px solid #2b2e83;
   text-align: center;
 }
 
 #estoqueatual .tableEstoque tbody tr td {
+  border: 2px solid #2b2e83;
   padding: 5px;
   text-align: center;
   font-size: 18px;
 }
 
 #estoqueatual .tableEstoque tbody tr td:first-child {
-  text-align: left;
+  text-align: center;
+}
+
+#estoqueatual .link-container:first-child .link {
+  margin: 0 0 0 auto;
+}
+
+@media (max-width: 768px) {
+  #estoqueatual .link-container .link {
+    width: 100% !important;
+  }
+}
+
+#estoqueatual .link-container .link {
+  width: 75%;
 }
 /*# sourceMappingURL=style.css.map */

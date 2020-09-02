@@ -1,9 +1,79 @@
-.tableEstoque {
-  margin-bottom: 25px;
+#entradaestoque .cabecalho-secao {
+  position: relative;
 }
 
-.tableEstoque .qtdAdicionar {
-  width: 99%;
+#entradaestoque .cabecalho-secao .link-inicial-container,
+#entradaestoque .cabecalho-secao .link-ultimas-container {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  position: absolute;
+}
+
+#entradaestoque .cabecalho-secao .link-inicial-container .link-inicial, #entradaestoque .cabecalho-secao .link-inicial-container .link-ultimas,
+#entradaestoque .cabecalho-secao .link-ultimas-container .link-inicial,
+#entradaestoque .cabecalho-secao .link-ultimas-container .link-ultimas {
+  background: #53CC7D;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#entradaestoque .cabecalho-secao .link-inicial-container .link-inicial:hover, #entradaestoque .cabecalho-secao .link-inicial-container .link-ultimas:hover,
+#entradaestoque .cabecalho-secao .link-ultimas-container .link-inicial:hover,
+#entradaestoque .cabecalho-secao .link-ultimas-container .link-ultimas:hover {
+  background: #3fc66e;
+}
+
+#entradaestoque .cabecalho-secao .link-ultimas-container {
+  right: 0 !important;
+}
+
+#entradaestoque .cabecalho-secao h1 {
+  text-align: center;
+  color: #2b2e83;
+  margin: 35px 0;
+  font-weight: bold;
+}
+
+#entradaestoque .cabecalho-entrada-saida .info-geral p {
+  color: #2b2e83;
+  font-weight: normal;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+#entradaestoque .cabecalho-entrada-saida .info-geral p span {
+  font-weight: bold;
+  color: #53CC7D;
+}
+
+#entradaestoque .tableEstoque {
+  margin: 35px 0;
+  width: 100%;
+}
+
+#entradaestoque .tableEstoque thead tr th {
+  text-align: center;
+}
+
+#entradaestoque .tableEstoque thead tr th:first-child {
+  width: 70%;
+}
+
+#entradaestoque .tableEstoque tbody tr td {
+  border: 1px solid #2b2e83;
+  text-align: center;
+}
+
+#entradaestoque .tableEstoque tbody tr td input {
+  border: none;
+  text-align: center;
+  width: 100%;
 }
 
 .btn-adicionar {
@@ -13,16 +83,6 @@
   background: #2b2e83;
   color: white;
   border-radius: 15px;
-  cursor: pointer;
-}
-
-.telainicial {
-  border: none;
-  background: none;
-  color: #2b2e83;
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: bold;
   cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,10 +1,22 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {Drawer, List, Divider, ListItem, ListItemText, IconButton} from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import StorageIcon from '@material-ui/icons/Storage';
+import AddIcon from '@material-ui/icons/Add';
+
+
+
+
+
+
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
+  const history = useHistory();
   const [state, setState] = React.useState({
     left: false
   });
@@ -27,25 +39,28 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button onClick={() => alert("Funcionalidade em desenvolvimento")}>
-          <ListItemText>Adicionar Usuário</ListItemText>
+        <ListItem button onClick={() => history.push('/')}>
+          <ListItemText><HomeIcon/> Página Inicial</ListItemText>
+        </ListItem>
+        <Divider/>
+        <ListItem button onClick={() => history.push('/estoque')}>
+          <ListItemText><StorageIcon/> Estoque atual</ListItemText>
+        </ListItem>
+        <Divider/>
+        <ListItem button onClick={() => history.push('/saida')}>
+          <ListItemText><AddIcon/> Entregar EPI</ListItemText>
+        </ListItem>
+        <ListItem button onClick={() => history.push('/saidas')}>
+          <ListItemText>Ultimas Entregas</ListItemText>
+        </ListItem>
+        <Divider/>
+        <ListItem button onClick={() => history.push('/entrada')}>
+          <ListItemText><AddIcon/> Entrada de EPI</ListItemText>
+        </ListItem>
+        <ListItem button onClick={() => history.push('/entradas')}>
+          <ListItemText>Ultimas Entradas</ListItemText>
         </ListItem>
       </List>
-      {/* <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button onClick={() => alert("Teste")} key={text}>              
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </div>
   );
 
@@ -69,7 +84,7 @@ export default function TemporaryDrawer() {
 
 const useStyles = makeStyles({
   list: {
-    width: 250
+    width: 350
   },
   fullList: {
     width: "auto"

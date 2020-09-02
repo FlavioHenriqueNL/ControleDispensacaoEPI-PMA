@@ -3,8 +3,12 @@ import Firebase from '../../Database/Connection';
 import {Link} from 'react-router-dom';
 import {Container, Grid, TextField} from '@material-ui/core';
 import moment from 'moment';
+import './style.css';
 
 import Header from '../../Components/Header/Header';
+
+import HomeIcon from '@material-ui/icons/Home';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 export default function Saida(){
   const [ubs, setUbs] = useState("");
@@ -94,22 +98,19 @@ export default function Saida(){
 
   return(
     
-    <main id="entradadeestoque">
+    <main id="saidaestoque">
       <Header/>
       <Container>
-        <Grid container direction="row" alignItems="center">
-          <Grid sm={2}><Link to="/">Ir para tela inicial</Link></Grid>
-          <Grid sm={10}><h1>Entregar EPI</h1></Grid>
+        <Grid container direction="row" className="cabecalho-secao" alignItems="center">
+          <Grid  className="link-inicial-container" sm={2}><Link className="link-inicial" to="/"><HomeIcon/> Página Inicial </Link></Grid>
+          <Grid sm={12}><h1>Entrega de EPI</h1></Grid>
+          <Grid  className="link-ultimas-container" sm={2}><Link className="link-ultimas" to="/saidas"><ListAltIcon/> Ultimas Saídas</Link></Grid>
         </Grid>
 
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid xs={6}>
-            <h1>Data: {moment().format("L")}</h1>
+        <Grid container className="cabecalho-entrada-saida" direction="row" justify="center" alignItems="center">
+          <Grid className="info-geral" xs={6}>
+            <p>Data: <span>{moment().format("DD/MM/YYYY")}</span></p>
+            <p>Dispensador: <span>{usuario}</span> </p>
           </Grid>
           <Grid xs={6}>
             <TextField fullWidth onChange={(e)=>setUbs(e.target.value)} id="outlined-basic" label="Unidade de Saúde" variant="outlined" />

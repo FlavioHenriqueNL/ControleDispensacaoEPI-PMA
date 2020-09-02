@@ -19,7 +19,7 @@ export default function AcordeaoIO({movimentacao}){
       state: { movimentacao }
     }
     return(
-      <Link to={newTo} > Gerar comprovante </Link>
+      <Link className="link-comprovante" to={newTo} > Gerar comprovante </Link>
     )
   }
 

@@ -32,44 +32,48 @@ const Estoque = () => {
   },[lista.length])
 
   return(
-    <main id="estoqueatual">
+    <>
       <Header/>
-      <Container>
 
-        <h1>Estoque Atual</h1>
-        <table className="tableEstoque">
-          <thead>
-            <tr>
-              <td id="nome">EPI</td>
-              <td id="quantidade">Quantidade em Estoque</td>
-              <td id="Situação">Situação</td>
-            </tr>
-          </thead>
-        
-          <tbody>
-            {
-              lista.map((epi) =>
-                <tr key={epi.id}>
-                  <td>{epi.nome}</td>
-                  <td>{epi.quantidade}</td>
-                  {epi.quantidade <= 20 ? <td>Quantidade Baixa</td>:<td>Nivel normal</td>}     
-                </tr>
-              )
-            }
-          </tbody>
-        </table>
-        
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Link to="/saida" className="link">Entregar EPI</Link>
-          </Grid>
-          <Grid item xs={6}>
-            <Link to="/entrada" className="link">Entrada de estoque</Link>
-          </Grid>
-        </Grid>
+      <main id="estoqueatual">
+        <Container>
 
-      </Container>
-    </main>
+          <h1>Estoque Atual</h1>
+          
+          <table className="tableEstoque">
+            <thead>
+              <tr>
+                <td id="nome">EPI</td>
+                <td id="quantidade">Quantidade em Estoque</td>
+                <td id="Situação">Situação</td>
+              </tr>
+            </thead>
+          
+            <tbody>
+              {
+                lista.map((epi) =>
+                  <tr key={epi.id}>
+                    <td>{epi.nome}</td>
+                    <td>{epi.quantidade}</td>
+                    {epi.quantidade <= 20 ? <td>Quantidade Baixa</td>:<td>Nivel normal</td>}     
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+          
+          <Grid container spacing={3}>
+            <Grid className="link-container" item xs={6}>
+              <Link to="/saida" className="link">Entregar EPI</Link>
+            </Grid>
+            <Grid className="link-container" item xs={6}>
+              <Link to="/entrada" className="link">Entrada de estoque</Link>
+            </Grid>
+          </Grid>
+
+        </Container>
+      </main>
+    </>
   );
 }
 

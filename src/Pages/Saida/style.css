@@ -1,0 +1,88 @@
+#saidaestoque .cabecalho-secao {
+  position: relative;
+}
+
+#saidaestoque .cabecalho-secao .link-inicial-container,
+#saidaestoque .cabecalho-secao .link-ultimas-container {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  position: absolute;
+}
+
+#saidaestoque .cabecalho-secao .link-inicial-container .link-inicial, #saidaestoque .cabecalho-secao .link-inicial-container .link-ultimas,
+#saidaestoque .cabecalho-secao .link-ultimas-container .link-inicial,
+#saidaestoque .cabecalho-secao .link-ultimas-container .link-ultimas {
+  background: #53CC7D;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#saidaestoque .cabecalho-secao .link-inicial-container .link-inicial:hover, #saidaestoque .cabecalho-secao .link-inicial-container .link-ultimas:hover,
+#saidaestoque .cabecalho-secao .link-ultimas-container .link-inicial:hover,
+#saidaestoque .cabecalho-secao .link-ultimas-container .link-ultimas:hover {
+  background: #3fc66e;
+}
+
+#saidaestoque .cabecalho-secao .link-ultimas-container {
+  right: 0 !important;
+}
+
+#saidaestoque .cabecalho-secao h1 {
+  text-align: center;
+  color: #2b2e83;
+  margin: 35px 0;
+  font-weight: bold;
+}
+
+#saidaestoque .cabecalho-entrada-saida .info-geral p {
+  color: #2b2e83;
+  font-weight: normal;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+#saidaestoque .cabecalho-entrada-saida .info-geral p span {
+  font-weight: bold;
+  color: #53CC7D;
+}
+
+#saidaestoque .tableEstoque {
+  margin: 35px 0;
+  width: 100%;
+}
+
+#saidaestoque .tableEstoque thead tr th {
+  text-align: center;
+}
+
+#saidaestoque .tableEstoque thead tr th:first-child {
+  width: 70%;
+}
+
+#saidaestoque .tableEstoque tbody tr td {
+  border: 1px solid #2b2e83;
+  text-align: center;
+}
+
+#saidaestoque .tableEstoque tbody tr td input {
+  border: none;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-adicionar {
+  width: 150px;
+  height: 50px;
+  border: none;
+  background: #2b2e83;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */

@@ -12,7 +12,7 @@ import './style.scss';
 export default function TabelaEpis({lista}){
 
   return(
-    <TableContainer component={Paper}>
+    <TableContainer className="tabela-row" component={Paper}>
       <Table aria-label="simple table" className="tabela-entrada-saida">
         <TableHead className="tableHead">
           <TableRow>

@@ -7,8 +7,11 @@ import moment from 'moment';
 import Header from '../../Components/Header/Header';
 import './style.css';
 
+import HomeIcon from '@material-ui/icons/Home';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+
 export default function Entrada(){
-  const [ubs, setUbs] = useState("");
+  const [motivo, setMotivo] = useState("");
   const [usuario, setUsuario] = useState("");
   const [epi, setEpi] = useState([]);
   const [addEpi, setAddEpi] = useState(epi);
@@ -56,9 +59,10 @@ export default function Entrada(){
   async function addMovimentacao(qtd){
    await Firebase.db.collection("movimentacoes").add({
       tipo: "Entrada",
-      data: moment().format("L"),
+      data: moment().format("DD/MM/YYYY"),
       epis: qtd,
-      nome: usuario
+      nome: usuario,
+      motivo
     }).then(
       alert("Movimentação criada com sucesso.")
     ).catch(err => alert(err));
@@ -93,25 +97,22 @@ export default function Entrada(){
 
   return(
     
-    <main id="entradadeestoque">
+    <main id="entradaestoque">
       <Header/>
       <Container>
-        <Grid container direction="row" alignItems="center">
-          <Grid sm={2}><Link to="/">Ir para tela inicial</Link></Grid>
-          <Grid sm={10}><h1>Entrada de Estoque de EPI</h1></Grid>
+        <Grid container direction="row" className="cabecalho-secao" alignItems="center">
+          <Grid  className="link-inicial-container" sm={2}><Link className="link-inicial" to="/"><HomeIcon/> Página Inicial </Link></Grid>
+          <Grid sm={12}><h1>Entrada de Estoque de EPI</h1></Grid>
+          <Grid  className="link-ultimas-container" sm={2}><Link className="link-ultimas" to="/entradas"><ListAltIcon/> Ultimas Entradas</Link></Grid>
         </Grid>
 
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid xs={6}>
-            <h1>Data: {moment().format("L")}</h1>
+        <Grid container className="cabecalho-entrada-saida" direction="row" justify="center" alignItems="center">
+          <Grid className="info-geral" xs={6}>
+            <p>Data: <span>{moment().format("DD/MM/YYYY")}</span></p>
+            <p>Dispensador: <span>{usuario}</span> </p>
           </Grid>
           <Grid xs={6}>
-            <TextField fullWidth onChange={(e)=>setUbs(e.target.value)} id="outlined-basic" label="Unidade de Saúde" variant="outlined" />
+            <TextField fullWidth onChange={(e)=>setMotivo(e.target.value)} id="outlined-basic" label="Motivo" variant="outlined" />
           </Grid>
         </Grid>
           

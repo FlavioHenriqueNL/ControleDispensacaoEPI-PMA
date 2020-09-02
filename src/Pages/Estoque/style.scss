@@ -1,9 +1,17 @@
 #estoqueatual{
+  h1{
+    text-align: center;
+    color: #2b2e83;
+    margin: 35px 0;
+    font-weight: bold;
+  }
   .tableEstoque{
     margin-bottom: 50px;
+    border: 2px solid #2b2e83;
     thead{
       tr{
         td{
+          border: 2px solid #2b2e83;
           text-align: center;
         }
       }
@@ -11,8 +19,9 @@
     tbody{
       tr{
         td{
+          border: 2px solid #2b2e83;
           &:first-child{
-            text-align: left;
+            text-align: center;
 
           }
           padding: 5px;
@@ -20,6 +29,21 @@
           font-size: 18px;
         }
       }
+    }
+  }
+  .link-container{
+    &:first-child{
+      .link{
+        margin: 0 0 0 auto;
+      }
+    }
+    @media (max-width: 768px) {
+      .link{
+        width: 100% !important;
+      }
+    }
+    .link{
+      width: 75%;
     }
   }
 }

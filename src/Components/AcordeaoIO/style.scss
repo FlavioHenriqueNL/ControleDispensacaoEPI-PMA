@@ -21,7 +21,10 @@
   }
   .acordeao-content{
     .acordeao-content-container{
+      padding: 20px;
       .acordeao-content-conteudo{
+        margin-bottom: 10px;
+        text-align: center;
         h1{
           font-size: 18px;
           span{
@@ -51,6 +54,17 @@
   width: 100%;
   height: auto;
 }
+.tabela-row{
+  margin-bottom: 25px;
+}
+  .link-comprovante{
+    background: red;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+  }
 
 .modal-paper{
   background: #fff;

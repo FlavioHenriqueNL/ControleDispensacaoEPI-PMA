@@ -1,0 +1,43 @@
+#ultimasSaidas header {
+  margin: 25px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
+#ultimasSaidas header button {
+  background: #2b2e83;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+#ultimasSaidas header button:hover {
+  background: #383ba9;
+}
+
+#ultimasSaidas header h1 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  position: relative;
+  text-align: center;
+  color: #2b2e83;
+  margin: 15px 0;
+  font-weight: bold;
+}
+/*# sourceMappingURL=style.css.map */
